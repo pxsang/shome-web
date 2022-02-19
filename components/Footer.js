@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
-import { Layout, Row, Col } from 'antd';
-import fetcher from '../helpers/fetcher';
+import React, { Component } from "react";
+import { Layout, Row, Col } from "antd";
+import fetcher from "../helpers/fetcher";
+import Link from "next/link";
+
 import {
   FacebookFilled,
   YoutubeFilled,
   InstagramFilled,
-} from '@ant-design/icons';
+} from "@ant-design/icons";
 
 class Footer extends Component {
   render() {
@@ -42,9 +44,21 @@ class Footer extends Component {
           <Col xs={24} md={8} className="follow">
             <h2 className="main-title text-white">Follow us</h2>
             <div className="follow__social">
-              <a className="facebook" href="https://www.facebook.com/ShomeInterior/">
+              <a
+                className="facebook"
+                href="https://www.facebook.com/ShomeInterior/"
+              >
                 <FacebookFilled className="follow__social__icon" />
               </a>
+              {/* <a
+                className="tiktok"
+                href="https://www.facebook.com/ShomeInterior/"
+              >
+                <img
+                  className="follow__social__icon"
+                  src={"/images/tiktok.svg"}
+                />
+              </a> */}
               {/* <a className="youtube" href="https://www.facebook.com/noithatgold">
                 <YoutubeFilled className="follow__social__icon" />
               </a>
@@ -57,6 +71,6 @@ class Footer extends Component {
       </Layout.Footer>
     );
   }
-};
+}
 
 export default Footer;

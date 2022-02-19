@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import { Row, Col, Menu } from 'antd';
-import { Layout } from 'antd';
-import { Modal, Button } from 'antd';
-import { getImageUrl } from '../utils/image-url';
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { Row, Col, Menu } from "antd";
+import { Layout } from "antd";
+import { Modal, Button } from "antd";
+import { getImageUrl } from "../utils/image-url";
 
 const Popup = (props) => {
   const { popup } = props;
@@ -14,7 +14,7 @@ const Popup = (props) => {
 
   useEffect(() => {
     if (popup) {
-      const closedPopup = sessionStorage.getItem('__popup');
+      const closedPopup = sessionStorage.getItem("__popup");
       if (parseInt(closedPopup) !== popup.id) {
         setOpen(true);
       } else {
@@ -24,9 +24,9 @@ const Popup = (props) => {
   }, []);
 
   const _onCancel = () => {
-    sessionStorage.setItem('__popup', popup.id);
+    sessionStorage.setItem("__popup", popup.id);
     setOpen(false);
-  }
+  };
 
   if (!popup) return null;
 
@@ -34,7 +34,7 @@ const Popup = (props) => {
     <Modal
       className="popup"
       maskStyle={{
-        backgroundColor: 'rgba(0, 0, 0, 0.65)'
+        backgroundColor: "rgba(0, 0, 0, 0.65)",
       }}
       title=""
       centered
@@ -45,6 +45,6 @@ const Popup = (props) => {
       <img src={getImageUrl(popup.image.url)} />
     </Modal>
   );
-}
+};
 
 export default Popup;
