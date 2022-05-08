@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import Link from "next/link";
 import Router from "next/router";
+import dateformat from "dateformat";
 import { Breadcrumb, Row, Col, Button, Spin, Alert } from "antd";
 import Layout from "../../components/Layout";
 import SEOMeta from "../../components/SEOMeta";
@@ -8,21 +9,21 @@ import Card from "../../components/Card";
 import { INTERIOR_DESIGN_SLUGS, ROUTE } from "../../constants/route";
 import fetcher from "../../helpers/fetcher";
 
-class Architecture extends Component {
+class News extends Component {
   state = {
-    architectures: this.props.architectures || [],
+    news: this.props.news || [],
     paging: this.props.paging || { page: 1, per_page: 6 },
     isLoading: false,
   };
 
   _loadData = async () => {
-    const newData = await fetcher.get("architectures", {
+    const newData = await fetcher.get("news", {
       data: this.state.paging,
     });
 
     setTimeout(() => {
       this.setState({
-        architectures: this.state.architectures.concat(newData),
+        news: this.state.news.concat(newData),
         isLoading: false,
       });
     }, 1000);
@@ -46,9 +47,9 @@ class Architecture extends Component {
       <>
         <SEOMeta
           key="seo"
-          title="Kiến trúc"
+          title="Tin tức"
           description="Chuyên tư vấn thiết kế và thi công nội thất căn hộ, nhà phố, biệt thự."
-          url="kien-truc"
+          url="tin-tuc"
         />
         <section>
           <Breadcrumb>
@@ -57,28 +58,28 @@ class Architecture extends Component {
                 <a>Trang chủ</a>
               </Link>
             </Breadcrumb.Item>
-            <Breadcrumb.Item key="architecture">
-              <Link href={ROUTE.ARCHITECTURE}>
-                <a>Kiến trúc</a>
+            <Breadcrumb.Item key="news">
+              <Link href={ROUTE.NEWS}>
+                <a>Tin tức</a>
               </Link>
             </Breadcrumb.Item>
           </Breadcrumb>
         </section>
         <section className="listing-container">
           <Row gutter={[32, 32]} className="listing-list">
-            {this.state.architectures.map((item) => (
+            {this.state.news.map((item) => (
               <Col key={item.id} xl={8} lg={12} md={24}>
                 <Card
                   image={item.avatar.url}
                   title={item.title}
-                  description={item.project}
-                  linkTo={`${ROUTE.ARCHITECTURE}/${item.slug}`}
+                  description={dateformat(item.created_at, "dd/mm/yyyy")}
+                  linkTo={`${ROUTE.NEWS}/${item.slug}`}
                 />
               </Col>
             ))}
           </Row>
         </section>
-        {this.state.architectures.length < this.props.total && (
+        {this.state.news.length < this.props.total && (
           <section className="center">
             <Button loading={this.state.isLoading} onClick={this.loadMore}>
               Xem thêm
@@ -90,22 +91,21 @@ class Architecture extends Component {
   }
 }
 
-Architecture.getInitialProps = () => {
+News.getInitialProps = () => {
   const paging = {
     page: 1,
     per_page: 6,
   };
-
   return Promise.all([
-    fetcher.get("architectures/count"),
-    fetcher.get("architectures", { data: paging }),
-  ]).then(([total, architectures]) => {
+    fetcher.get("news/count"),
+    fetcher.get("news", { data: paging }),
+  ]).then(([total, news]) => {
     return {
       total,
       paging,
-      architectures,
+      news,
     };
   });
 };
 
-export default Architecture;
+export default News;
