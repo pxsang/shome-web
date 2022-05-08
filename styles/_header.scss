@@ -53,6 +53,10 @@
         transition-timing-function: ease-out;
       }
 
+      &::after {
+        content: none;
+      }
+
       &.ant-menu-item-active,
       &.ant-menu-submenu-active {
         color: unset;

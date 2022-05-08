@@ -4,7 +4,17 @@
 }
 
 .content {
+}
 
+.listing-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.listing-list {
+  width: 100%;
+  max-width: 1400px;
 }
 
 @media (min-width: 992px) {
