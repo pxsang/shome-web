@@ -1,22 +1,22 @@
-import React, { Component, Fragment } from 'react';
-import { withRouter } from 'next/router';
-import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
-import dateFormat from 'dateformat';
-import { Row, Col, Button, Breadcrumb } from 'antd';
-import SEOMeta from '../../components/SEOMeta';
-import AdviseButton from '../../components/AdviseButton';
-import { ROUTE } from '../../constants/route';
-import fetcher from '../../helpers/fetcher';
+import React, { Component, Fragment } from "react";
+import { withRouter } from "next/router";
+import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+import dateFormat from "dateformat";
+import { Row, Col, Button, Breadcrumb } from "antd";
+import SEOMeta from "../../components/SEOMeta";
+import AdviseButton from "../../components/AdviseButton";
+import { ROUTE } from "../../constants/route";
+import fetcher from "../../helpers/fetcher";
+import Commitment from "../../components/Commitment";
 
 class ArchitectureSlug extends Component {
   static getInitialProps(ctx) {
     const { slug } = ctx.query;
 
-    return fetcher.get(`architectures/${slug}`)
-      .then(response => {
-        return { data: response };
-      });
+    return fetcher.get(`architectures/${slug}`).then((response) => {
+      return { data: response };
+    });
   }
 
   render() {
@@ -44,7 +44,7 @@ class ArchitectureSlug extends Component {
           <main className="container architecture-detail-page__content">
             <h1 className="article-title">{data.title}</h1>
             <ul className="date-post">
-              <li>{dateFormat(new Date(data.updated_at), 'dd/mm/yyyy')}</li>
+              <li>{dateFormat(new Date(data.updated_at), "dd/mm/yyyy")}</li>
               <li>Lượt xem: {data.count}</li>
               <li>Admin</li>
             </ul>
@@ -52,19 +52,15 @@ class ArchitectureSlug extends Component {
           </main>
           {data.video_url ? (
             <section className="video">
-              <iframe src={data.video_url} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe
+                src={data.video_url}
+                frameborder="0"
+                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
             </section>
           ) : null}
-          <section className="commitment">
-            <h5 className="title">Chúng tôi cam kết</h5>
-            <ol>
-              <li>Sản phẩm thi công đúng 100% so với bản vẽ thiết kế.</li>
-              <li>Sử dụng nguyên liệu đạt chứng chỉ chất lượng quốc tế, đảm bảo sức khỏe cho gia đình bạn.</li>
-              <li>Bảo hành tất cả các sản phẩm 2 năm, bảo hành chất lượng gỗ trọn vòng đời sử dụng.</li>
-              <li>Cam kết mức giá tốt nhất với nhiều ưu đãi bất ngờ trong năm 2020.</li>
-            </ol>
-            <AdviseButton />
-          </section>
+          <Commitment />
         </div>
       </>
     );

@@ -38,20 +38,25 @@
       display: flex;
       align-items: center;
 
-      &.tiktok {
-        color: red;
+      .tiktok {
+        img {
+          width: 32px;
+          height: 32px;
+        }
       }
 
       a:hover {
-        &.facebook {
-          color: #1877f2;
-        }
-        &.youtube {
-          color: #ff0000;
-        }
-        &.instagram {
-          color: #e4405f;
-        }
+        color: white;
+        transform: scale(1.1);
+        // &.facebook {
+        //   color: #1877f2;
+        // }
+        // &.youtube {
+        //   color: #ff0000;
+        // }
+        // &.instagram {
+        //   color: #e4405f;
+        // }
       }
 
       a {
