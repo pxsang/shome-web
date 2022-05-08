@@ -1,7 +1,8 @@
 version: '2'
 services:
-  test:
-    image: crissang/test:latest
+  web:
+    #image: shome-web
+    build: .
     environment:
       CRM_ENDPOINT: http://crm:10001/
     stdin_open: true
@@ -11,8 +12,25 @@ services:
     ports:
     - 10000:3000/tcp
   crm:
-    image: crissang/shome-crm:latest
+    #image: shome-crm
+    build: ../shome-cms
     stdin_open: true
     tty: true
     ports:
     - 10001:1337/tcp
+    volumes:
+      - ../shome-cms/tmp:/usr/src/app/.tmp
+      - ../shome-cms/public/uploads:/usr/src/app/public/uploads
+  proxy:
+    image: nginx:1.21.3
+    environment:
+      - TZ=${TZ}
+    volumes:
+      # - ./nginx/strapi.conf:/etc/nginx/sites-available/strapi.conf
+      # - ./nginx/upstream.conf:/etc/nginx/conf.d/upstream.conf
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+      - crm    
