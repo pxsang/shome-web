@@ -9,7 +9,7 @@ import SEOMeta from "../../../components/SEOMeta";
 import AdviseButton from "../../../components/AdviseButton";
 import { INTERIOR_DESIGN_SLUGS } from "../../../constants/route";
 import fetcher from "../../../helpers/fetcher";
-import Commitment from "../../components/Commitment";
+import Commitment from "../../../components/Commitment";
 
 class InteriorDesignDetail extends Component {
   static getInitialProps(ctx) {
